@@ -10,7 +10,7 @@ import org.oldfag.utils.ExplosionUtils;
 /**
  * @author John200410 3/5/2020 for OldfagAprilFools
  */
-public class RightClickBedEvent implements Listener {
+public class RightClickEvent implements Listener {
 
 	/**
 	 * Using PlayerInteractEvent because the sleep event was only fired post sleep :/
