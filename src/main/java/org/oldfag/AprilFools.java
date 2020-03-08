@@ -10,7 +10,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.oldfag.events.*;
+import org.oldfag.utils.MusicUtils;
+import org.primesoft.midiplayer.MidiPlayerMain;
+import org.primesoft.midiplayer.midiparser.MidiParser;
+import org.primesoft.midiplayer.track.GlobalTrack;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +34,6 @@ public class AprilFools extends JavaPlugin implements Listener {
 	 * hitting something with a tool that isn't a sword or axe deals the damage to the player instead of what they are attacking
 	 * player heads
 	 * if you punch a player with your fist they have a 10% chance of dropping their item
-	 * noteblock music
 	 */
 
 	/**
@@ -38,6 +42,8 @@ public class AprilFools extends JavaPlugin implements Listener {
 	public static List<ItemStack> blockList = new ArrayList<>();
 	public static List<ItemStack> flowers = new ArrayList<>();
 	public static List<ItemStack> opItems = new ArrayList<>();
+	public static MidiPlayerMain midiPlayer;
+	public static List<GlobalTrack> tracks = new ArrayList<>();
 
 	@Override
 	public void onEnable() {
@@ -45,16 +51,31 @@ public class AprilFools extends JavaPlugin implements Listener {
 		/*
 		 * Init
 		 */
+
+		//declare midiplayer instance
+		midiPlayer = MidiPlayerMain.getInstance();
+
 		//create list of all blocks at start so i wouldn't have to do it every time the event was called
 		generateBlockList();
+
+		//init music player hook
+		initMusicPlayer();
+
+		//check every second if a track is playing, if not then play a new one
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+			if(!midiPlayer.getMusicPlayer().isRunning()) {
+				midiPlayer.getMusicPlayer().playTrack(MusicUtils.getRandomTrack());
+			}
+		}, 0, 20);
+
 		//create list of flowers
 		flowers.add(new ItemStack(Material.YELLOW_FLOWER));
 		flowers.add(new ItemStack(Material.CHORUS_FLOWER));
 		flowers.add(new ItemStack(Material.DEAD_BUSH));
 		flowers.add(new ItemStack(Material.RED_ROSE));
 		flowers.add(new ItemStack(Material.DOUBLE_PLANT));
-		//create list of op items
 
+		//create list of op items
 		/*
 		 * Sword
 		 */
@@ -139,8 +160,19 @@ public class AprilFools extends JavaPlugin implements Listener {
 		opItems.add(new ItemStack(Material.ENDER_PORTAL_FRAME));
 		opItems.add(new ItemStack(Material.EYE_OF_ENDER));
 
+		//register events
 		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(), new SpawnEvent(), new BlockBreakEvent());
 
+	}
+
+	private void initMusicPlayer() {
+		File[] dir = midiPlayer.getDataFolder().listFiles(pathname -> pathname.getName().endsWith(".mid"));
+		if(dir != null) {
+			for (File file : dir) {
+				this.getLogger().info("added midi file " + file.getName());
+				tracks.add(new GlobalTrack(this, MidiParser.loadFile(file).getNotes()));
+			}
+		}
 	}
 
 	private void generateBlockList() {
@@ -152,7 +184,9 @@ public class AprilFools extends JavaPlugin implements Listener {
 		}
 	}
 
-	// makes code more condensed
+	/**
+	 * Condense code
+	 */
 	private void registerEvents(Plugin plugin, Listener... listeners) {
 		for (Listener listener : listeners) {
 			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
