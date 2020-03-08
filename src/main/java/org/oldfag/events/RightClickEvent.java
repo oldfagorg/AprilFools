@@ -3,6 +3,7 @@ package org.oldfag.events;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -24,6 +25,13 @@ public class RightClickEvent implements Listener {
 		 */
 		if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.BED_BLOCK) {
 			ExplosionUtils.createExplosion(event.getPlayer(), 10, true, true);
+		}
+
+		/*
+		 * Spawn witches when opening a chest
+		 */
+		if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.CHEST) {
+			event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.WITCH);
 		}
 
 		/*
