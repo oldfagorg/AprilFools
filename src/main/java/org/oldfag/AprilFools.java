@@ -13,7 +13,6 @@ public class AprilFools extends JavaPlugin implements Listener {
 
 	/**
 	 * TODO:
-	 * Chat modifications
 	 * place water only in nether
 	 * when entity dies spawn primed tnt
 	 * spawning withers spawns giants instead
