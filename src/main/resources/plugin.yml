@@ -4,3 +4,6 @@ main: org.oldfag.AprilFools
 
 depend:
   - MidiPlayer
+
+loadbefore:
+  - MidiPlayer
