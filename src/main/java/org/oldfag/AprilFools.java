@@ -22,7 +22,10 @@ public class AprilFools extends JavaPlugin implements Listener {
 	/*
 	 * TODO:
 	 * opening a chest causes a witch to spawn
-	 * you spawn in with random armor
+	 * leaderboard of top kills
+	 * creeper sounds randomly played
+	 * eating gives you a random potion effect
+	 * hitting something with a tool that isn't a sword or axe deals the damage to the player instead of what they are attacking
 	 * noteblock music
 	 */
 
