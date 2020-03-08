@@ -60,11 +60,18 @@ public class AprilFools extends JavaPlugin implements Listener {
 
 		//init music player hook
 		initMusicPlayer();
+		midiPlayer.getMusicPlayer().playTrack(MusicUtils.getRandomTrack());
 
 		//check every second if a track is playing, if not then play a new one
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-			if(!midiPlayer.getMusicPlayer().isRunning()) {
-				midiPlayer.getMusicPlayer().playTrack(MusicUtils.getRandomTrack());
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(midiPlayer.getMusicPlayer().getPlayingTracks());
+				if(midiPlayer.getMusicPlayer().getPlayingTracks().size() == 0) {
+					System.out.println("Playing new track");
+
+					midiPlayer.getMusicPlayer().playTrack(MusicUtils.getRandomTrack());
+				}
 			}
 		}, 0, 20);
 
