@@ -26,6 +26,8 @@ public class AprilFools extends JavaPlugin implements Listener {
 	 * creeper sounds randomly played
 	 * eating gives you a random potion effect
 	 * hitting something with a tool that isn't a sword or axe deals the damage to the player instead of what they are attacking
+	 * player heads
+	 * if you punch a player with your fist they have a 10% chance of dropping their item
 	 * noteblock music
 	 */
 
