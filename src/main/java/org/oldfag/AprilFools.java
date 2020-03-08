@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.oldfag.events.*;
 
@@ -136,31 +137,8 @@ public class AprilFools extends JavaPlugin implements Listener {
 		opItems.add(new ItemStack(Material.ENDER_PORTAL_FRAME));
 		opItems.add(new ItemStack(Material.EYE_OF_ENDER));
 
-		/*
-		 * Interact event
-		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
+		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(), new SpawnEvent(), new BlockBreakEvent());
 
-		/*
-		 * Chat modifications
-		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new ChatEvent(), this);
-
-		/*
-		 * Spawn tnt when entity dies
-		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new DeathEvent(), this);
-
-		/*
-		 * Spawn giant instead of wither
-		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new SpawnEvent(), this);
-
-		/*
-		 * Spawn random block when you break a block
-		 * Flower power
-		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
 	}
 
 	private void generateBlockList() {
@@ -169,6 +147,13 @@ public class AprilFools extends JavaPlugin implements Listener {
 			if(item.getResult().getType().isBlock()) {
 				blockList.add(item.getResult());
 			}
+		}
+	}
+
+	// shorten code a bit epic style
+	private void registerEvents(Plugin plugin, Listener... listeners) {
+		for (Listener listener : listeners) {
+			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
 		}
 	}
 
