@@ -150,7 +150,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 		}
 	}
 
-	// shorten code a bit epic style
+	// makes code more condensed
 	private void registerEvents(Plugin plugin, Listener... listeners) {
 		for (Listener listener : listeners) {
 			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
