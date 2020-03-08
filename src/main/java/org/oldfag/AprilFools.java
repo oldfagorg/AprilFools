@@ -32,7 +32,6 @@ public class AprilFools extends JavaPlugin implements Listener {
 	 * eating gives you a random potion effect
 	 * hitting something with a tool that isn't a sword or axe deals the damage to the player instead of what they are attacking
 	 * player heads
-	 * if you punch a player with your fist they have a 10% chance of dropping their item
 	 */
 
 	/**
@@ -166,7 +165,8 @@ public class AprilFools extends JavaPlugin implements Listener {
 		opItems.add(new ItemStack(Material.EYE_OF_ENDER));
 
 		//register events
-		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(), new SpawnEvent(), new BlockBreakEvent());
+		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
+				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent());
 
 	}
 
