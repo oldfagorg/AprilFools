@@ -1,3 +1,6 @@
 name: AprilFools
 version: @version@
 main: org.oldfag.AprilFools
+
+depend:
+  - MidiPlayer
