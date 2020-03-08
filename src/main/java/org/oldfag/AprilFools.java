@@ -11,6 +11,17 @@ import org.oldfag.events.RightClickEvent;
  */
 public class AprilFools extends JavaPlugin implements Listener {
 
+	/**
+	 * TODO:
+	 * Chat modifications
+	 * place water only in nether
+	 * when entity dies spawn primed tnt
+	 * spawning withers spawns giants instead
+	 * mining blocks drops a random block instead of the block you mined
+	 * flowers drop OP stuff
+	 * noteblock music
+	 */
+
 	@Override
 	public void onEnable() {
 

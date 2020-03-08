@@ -11,7 +11,7 @@ public class ChatEvent implements Listener {
 
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
-		//TODO
+
 	}
 
 }
