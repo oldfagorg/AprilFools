@@ -66,7 +66,6 @@ public class AprilFools extends JavaPlugin implements Listener {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
-				System.out.println(midiPlayer.getMusicPlayer().getPlayingTracks());
 				if(midiPlayer.getMusicPlayer().getPlayingTracks().size() == 0) {
 					System.out.println("Playing new track");
 
