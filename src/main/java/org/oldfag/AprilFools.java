@@ -25,7 +25,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 	public void onEnable() {
 
 		/*
-		 * Exploding beds
+		 * Interact event
 		 */
 		Bukkit.getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
 
