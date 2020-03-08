@@ -20,11 +20,11 @@ public class AttackEvent implements Listener {
 
     @EventHandler
     public void onAttack(EntityDamageByEntityEvent event) {
-        Player entity = (Player) event.getEntity();
         if (event.getEntity().getType() == EntityType.PLAYER &&
                 event.getDamager().getType() == EntityType.PLAYER) {
+            Player entity = (Player) event.getEntity();
             // 10% chance of executing
-            if (rand.nextInt(10) == 0) {
+            if (rand.nextInt(10) == 0 && entity.getInventory().getItemInMainHand() != null) {
                 Bukkit.getWorld(entity.getLocation().getWorld().getName()).dropItemNaturally(
                         entity.getLocation(), entity.getInventory().getItemInMainHand());
                 entity.getInventory().remove(entity.getInventory().getItemInMainHand());
