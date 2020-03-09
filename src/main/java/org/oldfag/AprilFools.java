@@ -9,6 +9,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.*;
 import org.oldfag.events.*;
 import org.oldfag.utils.MusicUtils;
 import org.primesoft.midiplayer.MidiPlayerMain;
@@ -21,7 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author John200410 3/5/2020 for OldfagAprilFools
+ * @author John200410, x1D 3/5/2020 for OldfagAprilFools
  */
 public class AprilFools extends JavaPlugin implements Listener {
 
@@ -165,8 +166,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 		opItems.add(new ItemStack(Material.EYE_OF_ENDER));
 
 		//register events
-		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
-				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent());
+		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(), new SpawnEvent(), new BlockBreakEvent(), new AttackEvent());
 
 	}
 
@@ -183,7 +183,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 	private void generateBlockList() {
 		for (Iterator<Recipe> it = Bukkit.recipeIterator(); it.hasNext(); ) {
 			Recipe item = it.next();
-			if(item.getResult().getType().isBlock()) {
+			if(item.getResult().getType().isBlock() && item.getResult().getType() != Material.AIR) {
 				blockList.add(item.getResult());
 			}
 		}

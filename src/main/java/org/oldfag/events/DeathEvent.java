@@ -1,6 +1,5 @@
 package org.oldfag.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -18,9 +17,11 @@ public class DeathEvent implements Listener {
 	 */
 	@EventHandler
 	public void onDeath(EntityDeathEvent event) {
+		/*
+		 * Spawn tnt when entity dies
+		 */
 		if(event.getEntity() instanceof Monster || event.getEntity() instanceof Player) {
 			event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation(), EntityType.PRIMED_TNT);
 		}
 	}
-
 }
