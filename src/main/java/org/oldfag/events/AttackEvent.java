@@ -1,5 +1,6 @@
 package org.oldfag.events;
 
+import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -9,27 +10,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Random;
-
-/**
- * @author x1D, 03/08/2020
- */
 public class AttackEvent implements Listener {
-
 	private Random rand = new Random();
 
 	@EventHandler
 	public void onAttack(EntityDamageByEntityEvent event) {
-		if(event.getEntity().getType() == EntityType.PLAYER && event.getDamager().getType() == EntityType.PLAYER) {
-			Player entity = (Player) event.getEntity();
-			// 10% chance of executing
-			if(rand.nextInt(10) == 0 && entity.getInventory().getItemInMainHand() != null) {
+		if ((event.getEntity().getType() == EntityType.PLAYER) && (event.getDamager().getType() == EntityType.PLAYER)) {
+			Player attacker = (Player)event.getDamager();
+			Player entity = (Player)event.getEntity();
+			if ((this.rand.nextInt(10) == 0) && (entity.getInventory().getItemInMainHand() != null)) {
 				Bukkit.getWorld(entity.getLocation().getWorld().getName()).dropItemNaturally(entity.getLocation(), entity.getInventory().getItemInMainHand());
 				entity.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
 				entity.updateInventory();
 			}
-
+			if ((attacker.getInventory().getItemInMainHand().getType() != Material.DIAMOND_AXE) &&
+					(attacker.getInventory().getItemInMainHand().getType() != Material.DIAMOND_SWORD)) {
+				event.setCancelled(true);
+				attacker.damage(event.getFinalDamage());
+			}
 		}
 	}
-
 }
