@@ -30,7 +30,7 @@ public class AttackEvent implements Listener {
 				entity.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
 				entity.updateInventory();
 			}
-			if((attacker.getInventory().getItemInMainHand().getType() != Material.DIAMOND_AXE) && (attacker.getInventory().getItemInMainHand().getType() != Material.DIAMOND_SWORD)) {
+			if((attacker.getInventory().getItemInMainHand().getType() == Material.DIAMOND_AXE) || (attacker.getInventory().getItemInMainHand().getType() == Material.DIAMOND_SWORD)) {
 				event.setCancelled(true);
 				attacker.damage(event.getFinalDamage());
 			}
