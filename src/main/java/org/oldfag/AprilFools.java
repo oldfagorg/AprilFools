@@ -214,7 +214,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 	private void generateBlockList() {
 		for (Iterator<Recipe> it = Bukkit.recipeIterator(); it.hasNext(); ) {
 			Recipe item = it.next();
-			if(item.getResult().getType().isBlock()) {
+			if(item.getResult().getType().isBlock() && item.getResult().getType() != Material.AIR) {
 				blockList.add(item.getResult());
 			}
 		}
