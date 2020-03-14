@@ -9,6 +9,8 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.oldfag.events.*;
 import org.oldfag.utils.MusicUtils;
 import org.primesoft.midiplayer.MidiPlayerMain;
@@ -25,15 +27,6 @@ import java.util.List;
  */
 public class AprilFools extends JavaPlugin implements Listener {
 
-	/*
-	 * TODO:
-	 * leaderboard of top kills
-	 * creeper sounds randomly played
-	 * eating gives you a random potion effect
-	 * hitting something with a tool that isn't a sword or axe deals the damage to the player instead of what they are attacking
-	 * player heads
-	 */
-
 	/**
 	 * Constants
 	 */
@@ -42,6 +35,8 @@ public class AprilFools extends JavaPlugin implements Listener {
 	public static List<ItemStack> opItems = new ArrayList<>();
 	public static MidiPlayerMain midiPlayer;
 	public static List<GlobalTrack> tracks = new ArrayList<>();
+
+	public static List<PotionEffect> potionEffects = new ArrayList<>();
 
 	@Override
 	public void onEnable() {
@@ -78,6 +73,35 @@ public class AprilFools extends JavaPlugin implements Listener {
 		flowers.add(new ItemStack(Material.DEAD_BUSH));
 		flowers.add(new ItemStack(Material.RED_ROSE));
 		flowers.add(new ItemStack(Material.DOUBLE_PLANT));
+
+		//create list of potion effects
+		potionEffects.add(new PotionEffect(PotionEffectType.ABSORPTION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.BLINDNESS, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.CONFUSION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.FAST_DIGGING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.GLOWING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HARM, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HEAL, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HUNGER, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.INVISIBILITY, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.JUMP, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.LEVITATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.LUCK, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.NIGHT_VISION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.POISON, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.REGENERATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SATURATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SLOW, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SPEED, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.UNLUCK, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WATER_BREATHING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WITHER, 300, 0, true, false));
 
 		//create list of op items
 		/*
@@ -166,7 +190,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 
 		//register events
 		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
-				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent());
+				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent(), new EatEvent());
 
 	}
 
