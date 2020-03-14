@@ -24,7 +24,7 @@ public class EatEvent implements Listener {
      */
     @EventHandler
     public void onEat(PlayerItemConsumeEvent event) {
-        if(this.rand.nextInt(100) == 0) {
+        if(this.rand.nextInt(30) == 0) {
             CoronaUtils.giveVirus(event.getPlayer());
         }
     }
