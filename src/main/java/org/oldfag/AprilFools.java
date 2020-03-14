@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author John200410 3/5/2020 for OldfagAprilFools
+ * @author John200410, x1D 3/5/2020 for OldfagAprilFools
  */
 public class AprilFools extends JavaPlugin implements Listener {
 
@@ -75,35 +75,18 @@ public class AprilFools extends JavaPlugin implements Listener {
 		flowers.add(new ItemStack(Material.DOUBLE_PLANT));
 
 		//create list of potion effects
-		potionEffects.add(new PotionEffect(PotionEffectType.ABSORPTION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.BLINDNESS, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.CONFUSION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.FAST_DIGGING, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.GLOWING, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.HARM, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.HEAL, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.HUNGER, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.INVISIBILITY, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.JUMP, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.LEVITATION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.LUCK, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.NIGHT_VISION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.POISON, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.REGENERATION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.SATURATION, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.SLOW, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.SPEED, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.UNLUCK, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.WATER_BREATHING, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 300, 0, true, false));
-		potionEffects.add(new PotionEffect(PotionEffectType.WITHER, 300, 0, true, false));
+		this.initPotions();
 
 		//create list of op items
+		this.initItems();
+
+		//register events
+		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
+				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent(), new EatEvent());
+
+	}
+
+	private void initItems() {
 		/*
 		 * Sword
 		 */
@@ -187,10 +170,36 @@ public class AprilFools extends JavaPlugin implements Listener {
 		opItems.add(new ItemStack(Material.TOTEM));
 		opItems.add(new ItemStack(Material.ENDER_PORTAL_FRAME));
 		opItems.add(new ItemStack(Material.EYE_OF_ENDER));
+	}
 
-		//register events
-		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
-				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent(), new EatEvent());
+	private void initPotions() {
+		potionEffects.add(new PotionEffect(PotionEffectType.ABSORPTION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.BLINDNESS, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.CONFUSION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.FAST_DIGGING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.GLOWING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HARM, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HEAL, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.HUNGER, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.INVISIBILITY, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.JUMP, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.LEVITATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.LUCK, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.NIGHT_VISION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.POISON, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.REGENERATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SATURATION, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SLOW, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.SPEED, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.UNLUCK, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WATER_BREATHING, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 300, 0, true, false));
+		potionEffects.add(new PotionEffect(PotionEffectType.WITHER, 300, 0, true, false));
 
 	}
 
