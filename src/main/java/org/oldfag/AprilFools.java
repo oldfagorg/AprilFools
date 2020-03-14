@@ -81,8 +81,7 @@ public class AprilFools extends JavaPlugin implements Listener {
 		this.initItems();
 
 		//register events
-		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(),
-				new SpawnEvent(), new BlockBreakEvent(), new AttackEvent(), new EatEvent());
+		registerEvents(this, new RightClickEvent(), new ChatEvent(), new DeathEvent(), new SpawnEvent(), new BlockBreakEvent(), new AttackEvent(), new EatEvent(), new MoveEvent());
 
 	}
 
